@@ -156,7 +156,8 @@ def BJKST(x: RDD[String], width: Int, trials: Int): Double = {
 ```
 
 - BJKST (Bucket Size: 100, Trials: 5). Time elapsed: 50s. Estimate: 6684672.0
-
+- 
+- Exact F0: 7406649
 
 
 
