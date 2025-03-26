@@ -159,6 +159,15 @@ def BJKST(x: RDD[String], width: Int, trials: Int): Double = {
 - BJKST (Bucket Size: 200, Trials: 10) Time elapsed:69s. Estimate: 7700480.0
 - Exact F0: 7406649
 
+## 4. Comparison and Conclusion
+
+**BJKST vs. Exact F₀:**  
+The BJKST sketch is designed to approximate the number of distinct elements (F₀) using a controlled-size bucket. In our runs, using a bucket size of 200 with 10 trials produced an estimate of 7,700,480, which is very close to the exact distinct count of 7,406,649. This shows that by tuning parameters (bucket size and number of trials), BJKST can achieve accuracy within a tight error margin while often running faster than computing the exact distinct count.
+
+**Tug-of-War vs. Exact F₂:**  
+For estimating the second frequency moment (F₂), the exact calculation yielded 8,567,966,130 in 116 seconds. The Tug-of-War algorithm, which relies on summing randomly signed contributions and then squaring them, exhibited a strong sensitivity to its parameters. With higher settings (width = 10, depth = 3), it achieved a reasonably close estimate of 9,600,622,926, but at a much higher cost in time (1129 seconds). In contrast, a lower setting (width = 1, depth = 1) gave a very fast runtime (39 seconds) but at the expense of significant accuracy, yielding an estimate of only 1,180,747,044. This highlights that while the Tug-of-War sketch can approximate F₂, choosing the right parameter balance is critical—improved accuracy comes with a steep increase in runtime.
+
+The key takeaway from our experiments is that both sketching algorithms provide trade-offs between speed and accuracy compared to their exact counterparts.
 
 
 
